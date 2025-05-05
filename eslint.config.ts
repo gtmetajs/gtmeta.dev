@@ -1,16 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import stylisticPlugin from '@stylistic/eslint-plugin';
 import { TSESLint } from '@typescript-eslint/utils';
 import prettierConfig from 'eslint-config-prettier';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import tsdocPlugin from 'eslint-plugin-tsdoc';
 import tseslint from 'typescript-eslint';
-
-const compat = new FlatCompat({
-	baseDirectory: import.meta.dirname,
-});
 
 export default [
 	eslint.configs.recommended,
@@ -18,8 +15,9 @@ export default [
 	...tseslint.configs.stylisticTypeChecked,
 	reactPlugin.configs.flat['recommended']!,
 	reactPlugin.configs.flat['jsx-runtime']!,
+	reactHooksPlugin.configs['recommended-latest'],
 	reactRefreshPlugin.configs.vite,
-	...compat.extends('plugin:react-hooks/recommended'),
+	jsxA11yPlugin.flatConfigs.strict,
 	prettierConfig,
 	{
 		ignores: ['dist/'],
@@ -81,6 +79,12 @@ export default [
 				},
 			],
 			'@typescript-eslint/no-non-null-assertion': 'off',
+			'@typescript-eslint/restrict-template-expressions': [
+				'error',
+				{
+					allowNumber: true,
+				},
+			],
 			'@typescript-eslint/switch-exhaustiveness-check': 'error',
 			'react/prefer-read-only-props': 'warn',
 			'@stylistic/max-len': [
