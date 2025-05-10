@@ -1,6 +1,7 @@
 /// <reference types="prettier-plugin-organize-imports/prettier" />
 /// <reference types="prettier-plugin-tailwindcss" />
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-svgr/client" />
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
